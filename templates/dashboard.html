@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='Dash.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <video autoplay muted loop id="videoBackground">
+        <source src="{{ url_for('static', filename='fondodash.mp4') }}" type="video/mp4">
+    </video>
+    <div class="top-bar">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <h1 id="bouncing-text">HOW CLOTHES</h1>
+        <img src="{{ url_for('static', filename='logoHC.png') }}" alt="Logo" class="logo-dashboard">
+    </div>
+
+
+    <div id="sideMenu" class="side-menu">
+        <p class="menu-section">👤 Cuenta</p>
+        <a href="recuperar">🔒 Cambiar contraseña</a>
+        <a href="logout">🚪 Cerrar sesión</a>
+
+        <hr>
+
+        <p class="menu-section">💬 Soporte</p>
+        <a href="politicas">📄 Políticas de privacidad</a>
+        <a href="contacto">📬 Ayuda / Contacto</a>
+    </div>
+
+    <div class="container">
+        <br><br><br><br>
+        <h2>Sube una foto para analizar la combinación de colores</h2>
+        <br><br>
+        <form method="POST" enctype="multipart/form-data">
+            <label class="custom-file-upload">
+                <input type="file" name="foto" required>
+                📷 Seleccionar imagen
+            </label>
+            <br><br>
+            <button type="submit" class="boton">Analizar</button>
+        </form>
+
+        {% if resultado %}
+            <div class="resultado">{{ resultado }}</div>
+        {% endif %}
+    </div>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("sideMenu");
+            menu.classList.toggle("open");
+        }
+    </script>
+</body>
+</html>

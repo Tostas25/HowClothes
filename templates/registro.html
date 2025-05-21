@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro</title>
+  <link rel="stylesheet" href="static/RyL.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+  <video autoplay muted loop id="videoBackground">
+    <source src="{{ url_for('static', filename='fondo.mp4') }}" type="video/mp4">
+  </video>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="w-100" style="max-width: 400px;">
+      <form method="POST" action="/registro" class="p-4 rounded" style="background-color: #4c4c4c;">
+        {% if error %}
+          <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <h5 class="text-center mb-4">
+          <img src="{{ url_for('static', filename='logoHC.png') }}" alt="Logo" class="logo-inline">
+          Registro
+        </h5>
+
+        <input class="form-control insertar mb-3" type="text" name="username" placeholder="Nombre de usuario" required>
+        <input class="form-control insertar mb-3" type="email" name="email" placeholder="Correo electrónico" required>
+
+        <div class="input-container position-relative mb-3">
+          <input class="form-control insertar" type="password" id="password" name="password"
+                 placeholder="Contraseña" required
+                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}">
+          <i class="bi bi-eye-slash eye-icon" id="togglePassword1" onclick="togglePassword('password', 'togglePassword1')"></i>
+        </div>
+
+        <div class="input-container position-relative mb-3">
+          <input class="form-control insertar" type="password" id="confirm_password" name="confirm_password"
+                 placeholder="Confirmar contraseña" required>
+          <i class="bi bi-eye-slash eye-icon" id="togglePassword2" onclick="togglePassword('confirm_password', 'togglePassword2')"></i>
+        </div>
+
+        <p id="passwordError" class="error" style="display: none;"></p>
+
+        <div class="form-check text-white mb-3">
+          <input class="form-check-input" type="checkbox" name="politicas" required>
+          <span style="font-size: 0.75em; font-weight: bold;">
+            Acepto las <a href="/politicas" target="_blank">políticas de privacidad y tratamiento de imágenes</a>
+          </span>
+        </div>
+
+        <button class="btn btn-primary w-100 boton" type="submit">Registrarse</button>
+
+        <div class="text-center mt-3">
+          <p>¿Ya tienes una cuenta? <a href="/login">Inicia sesión</a></p>
+          <p class="ayuda">¿Necesitas ayuda? <a href="/contacto">Contáctanos</a></p>
+          <br><br><br><br>
+          <small class="form-text text-light mb-3" style="font-size: 0.6em;">
+            NOTA: La contraseña debe tener al menos 8 caracteres, incluir una mayúscula, una minúscula, un número y un símbolo especial.
+          </small>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      const isPassword = input.type === 'password';
+
+      input.type = isPassword ? 'text' : 'password';
+      icon.classList.toggle('bi-eye');
+      icon.classList.toggle('bi-eye-slash');
+    }
+
+    document.querySelector("form").addEventListener("submit", function (e) {
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm_password").value;
+      const errorField = document.getElementById("passwordError");
+      const regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&]).{8,}$/;
+
+      if (!regex.test(password)) {
+        errorField.textContent = "Debe tener 8+ caracteres, mayúscula, minúscula, número y símbolo especial.";
+        errorField.style.display = "block";
+        e.preventDefault();
+        return;
+      }
+
+      if (password !== confirm) {
+        errorField.textContent = "Las contraseñas no coinciden.";
+        errorField.style.display = "block";
+        e.preventDefault();
+        return;
+      }
+
+      errorField.style.display = "none";
+    });
+  </script>
+</body>
+</html>

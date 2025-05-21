@@ -1,0 +1,203 @@
+body {
+    background-color: #f4f4f4;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.menu-toggle {
+    font-size: 1.8em;
+    cursor: pointer;
+}
+
+.logo-dashboard {
+    height: 40px;
+    border-radius: 40%;
+}
+
+/* Side menu */
+.side-menu {
+    position: fixed;
+    top: 50px;
+    left: -220px;
+    width: 200px;
+    background-color: #444;
+    color: white;
+    padding: 20px 15px;
+    transition: left 0.3s ease-in-out;
+    z-index: 100;
+    height: 100vh;
+    overflow-y: auto;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+.side-menu a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    margin: 10px 0;
+    padding: 8px;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.side-menu a:hover {
+    background-color: #5a5a5a;
+}
+
+.menu-section {
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #ccc;
+    margin-top: 20px;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #666;
+}
+
+hr {
+    border-color: #666;
+}
+
+/* Contenido */
+.container {
+    padding: 30px;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #005f99;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #007acc;
+}
+
+.custom-file-upload input[type="file"] {
+    display: none;
+}
+
+.boton {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+.boton:hover {
+    background-color: #218838;
+}
+
+.resultado {
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.container h2{
+    color: white;
+}
+
+
+@media (max-width: 600px) {
+    .top-bar {
+        flex-direction: row;
+        padding: 10px;
+    }
+
+    .logo-dashboard {
+        height: 35px;
+    }
+
+    .side-menu {
+        width: 160px;
+        top: 45px;
+    }
+
+    .container {
+        padding: 20px 15px;
+        max-width: 100%;
+    }
+
+    .custom-file-upload {
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .boton {
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+
+#videoBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    object-fit: cover;
+    filter: brightness(0.6); /* oscurece un poco para mayor contraste */
+}
+
+.top-bar {
+    position: relative; /* Añade esto para contener el texto que se moverá */
+    overflow: hidden; /* Para que el texto no sobresalga */
+}
+
+#bouncing-text {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    animation: bounce 10s linear infinite alternate;
+}
+
+@keyframes bounce {
+    0% {
+        left: 10%;
+        transform: translateX(0);
+    }
+    48% {
+        animation-timing-function: ease-out;
+    }
+    50% {
+        left: 90%;
+        transform: translateX(-100%);
+        animation-timing-function: ease-in;
+    }
+    98% {
+        animation-timing-function: ease-out;
+    }
+    100% {
+        left: 10%;
+        transform: translateX(0);
+    }
+}

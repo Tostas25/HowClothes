@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar sesión</title>
+  <link rel="stylesheet" href="static/RyL.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    .input-container {
+      position: relative;
+    }
+    .eye-icon {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="videoBackground">
+    <source src="{{ url_for('static', filename='fondo.mp4') }}" type="video/mp4">
+  </video>
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="w-100" style="max-width: 400px;">
+      <form method="POST" class="p-4 rounded" style="background-color: #4c4c4c;">
+        {% if error %}
+          <p class="error">{{ error }}</p>
+        {% endif %}
+        <h5 class="text-center mb-4">
+          <img src="{{ url_for('static', filename='logoHC.png') }}" alt="Logo" class="logo-inline">
+          Iniciar Sesión
+        </h5>
+
+        <input type="text" name="nombre" placeholder="Nombre de usuario" class="form-control insertar mb-3" required>
+
+        <div class="input-container mb-3">
+          <input type="password" name="contraseña" placeholder="Contraseña" class="form-control insertar" id="loginPassword" required>
+          <i class="bi bi-eye-slash eye-icon" id="toggleLoginPassword" onclick="togglePassword('loginPassword', 'toggleLoginPassword')"></i>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100 boton">Entrar</button>
+
+        <div class="text-center mt-4">
+          <p>¿No tienes una cuenta? <a href="/registro">Regístrate aquí</a></p>
+          <p><a href="/recuperar">¿Olvidaste tu contraseña?</a></p>
+          <p class="ayuda">¿Necesitas ayuda? <a href="/contacto">Contáctanos</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+      icon.classList.toggle("bi-eye");
+      icon.classList.toggle("bi-eye-slash");
+    }
+  </script>
+</body>
+</html>
