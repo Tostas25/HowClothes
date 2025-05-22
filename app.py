@@ -228,8 +228,8 @@ def reset_password(token):
 
     error = None
     if request.method == 'POST':
-        nueva = request.form['nueva']
-        confirmar = request.form['confirmar']
+        nueva = request.form['password']
+        confirmar = request.form['confirm_password']
         if nueva != confirmar:
             error = "⚠ Las contraseñas no coinciden."
         else:
